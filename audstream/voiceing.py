@@ -5,7 +5,7 @@ import threading
 
 from colorama import Fore, Style
 
-class AudStream:
+class AudStreamer:
     def __init__(self, name_of_file: str = "output.wav"):
         self.name_of_file = name_of_file
         self.recording = False
@@ -56,5 +56,5 @@ class AudStream:
         self.recording = False
         self.thread.join()
         
-audio = AudStream()
+audio = AudStreamer()
 audio.start_recording(2, 44100, record_time=10)
