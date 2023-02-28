@@ -1,0 +1,59 @@
+Metadata-Version: 2.1
+Name: audstream
+Version: 0.0.1
+Summary: A small example package
+Author: ryzmae (Ceeq9717)
+Author-email: ryzmae <juwennagpal6@gmail.com>
+Project-URL: Homepage, https://github.com/ceeq9717/audstream
+Project-URL: Bug Tracker, https://github.com/ceeq9717/audstream/issues
+Keywords: python,audio,stream,audio stream
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+License-File: LICENCE
+
+# What is AudStream?
+
+**AudStream is a simple audio streaming server written in Python.**
+
+## Features
+
+* **Simple** - AudStream is a simple audio streaming server written in Python. It is designed to be easy to use and easy to understand.
+
+* **Lightweight** - AudStream is a lightweight audio streaming server written in Python. It is designed to be easy to use and easy to understand.
+
+* **Cross-platform** - AudStream is a cross-platform audio streaming server written in Python. It is designed to be easy to use and easy to understand.
+
+* **Open source** - AudStream is an open source audio streaming server written in Python. It is designed to be easy to use and easy to understand.
+
+* **Free** - AudStream is a free audio streaming server written in Python. It is designed to be easy to use and easy to understand.
+
+## Installation
+
+### Requirements
+
+* Python 3.6 or higher
+
+### MacOS/Linux
+
+```sh
+pip3 install audstream
+```
+
+### Windows
+
+```sh
+pip install audstream
+```
+
+## Example Usage
+
+```py
+from audstream import AudStreamer
+
+audio = AudStreamer(channels=1, rate=44100, record_time=10)
+
+audio.start_recording()
+```
