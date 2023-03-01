@@ -32,12 +32,17 @@ pip3 install audstream
 pip install audstream
 ```
 
+### Developer Installation
+
+```sh
+pip install git+https://github.com/ceeq9717/audstream.git
+```
+
 ## Example Usage
 
 ```py
 from audstream import AudStreamer
 
-audio = AudStreamer(channels=1, rate=44100, record_time=10)
-
-audio.start_recording()
+aud_streamer = AudStreamer(filename="xyz.mp3")
+aud_streamer.start_recording(1, 384000, 5)
 ```
