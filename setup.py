@@ -21,7 +21,7 @@ setup(
     long_description_content_type="text/markdown",
     long_description=long_description,
     packages=find_packages(),
-    install_requires=['wave', 'pyaudio'],
+    install_requires=['wave', 'pyaudio', 'colorama'],
     keywords=['python', 'audio', 'stream', 'audio stream'],
     classifiers=[
         "Development Status :: 1 - Planning",
