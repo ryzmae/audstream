@@ -26,23 +26,16 @@ import time
 import threading
 
 from colorama import Fore, Style
+from sys import platform
 
 class AudStreamer:
-    def __init__(self, filename: str = "output.mp3"):
+    def __init__(self, filename: str = "output.wav"):
         self.filname = filename
         self.recording = False
         self.thread = None
         self.audios = [
-            ".aac",
-            ".aiff",
-            ".flac",
-            ".cda",
-            ".m4a",
             ".mp3",
-            ".ogg",
-            ".wav",
-            ".wma",
-            ".mp4"
+            ".wav"
         ]
         
         if not self.filname.endswith(tuple(self.audios)):
@@ -57,14 +50,22 @@ class AudStreamer:
         print(Style.BRIGHT + Fore.GREEN + "[AUDSREAMER] Recording..." + Style.RESET_ALL + Fore.RESET)
         
         if record_time is None:
-            while self.recording:
-                data = stream.read(1024)
-                frames.append(data)
+            try:
+                while self.recording:
+                    data = stream.read(1024)
+                    frames.append(data)
+                    
+            except KeyboardInterrupt:
+                pass
                 
         else:
-            while self.recording and int(time.time()) - start_time < record_time:
-                data = stream.read(1024)
-                frames.append(data)
+            try:
+                while self.recording and int(time.time()) - start_time < record_time:
+                    data = stream.read(1024)
+                    frames.append(data)
+                    
+            except KeyboardInterrupt:
+                pass
                 
         stream.stop_stream()
         stream.close()
@@ -79,17 +80,25 @@ class AudStreamer:
         
         
     def start_recording(self, channels: int, rate: int, record_time: int = None, start_time: int = 0):
+
         if channels > 2:
             print(Style.BRIGHT + Fore.RED + "[WARNING] Channels must be 1 or 2!" + Style.RESET_ALL + Fore.RESET)
             return
         
         elif rate > 38400:
-            print(Style.BRIGHT + Fore.RED + "[WARNING] Rate must be 38400 or lower!" + Style.RESET_ALL + Fore.RESET)
-            return
-        
-        elif channels > 2 and rate > 38400:
-            print(Style.BRIGHT + Fore.RED + "[WARNING] Channels must be 1 or 2 and rate must be 38400 or lower!" + Style.RESET_ALL + Fore.RESET)
-            return
+            if platform == "win32":
+                print(Style.BRIGHT + Fore.RED + "[WARNING] Rate must be 38400!" + Style.RESET_ALL + Fore.RESET)
+                return
+            
+        elif rate > 44100:
+            if platform == "linux" or platform == "linux2":
+                print(Style.BRIGHT + Fore.RED + "[WARNING] Rate must be 44100!" + Style.RESET_ALL + Fore.RESET)
+                return
+            
+        elif rate > 44100:
+            if platform == "darwin":
+                print(Style.BRIGHT + Fore.RED + "[WARNING] Rate must be 44100!" + Style.RESET_ALL + Fore.RESET)
+                return
         
         self.recording = True
         self.thread = threading.Thread(target=self._record, args=(

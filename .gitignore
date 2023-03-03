@@ -1,2 +1,3 @@
-./dist
-./audstream.egg-info
+./dist/*
+./audstream.egg-info/*
+./audstream/__pycache__/*
