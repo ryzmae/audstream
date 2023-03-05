@@ -1,4 +1,4 @@
-# AudStream - 0.0.3
+# AudStream - 0.0.5
 
 [![Downloads](https://static.pepy.tech/badge/audstream)](https://pepy.tech/project/audstream)
 ![PyPI - License](https://img.shields.io/pypi/l/audstream)

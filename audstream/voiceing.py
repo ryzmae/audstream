@@ -26,9 +26,14 @@ import wave
 import time
 import threading
 
+from .utils.time import time as with_date
 from colorama import Fore, Style
 from sys import platform
 class AudStreamer:
+    """
+    A simple audio streamer for Python.
+    Copyright (C) 2023 Ceeq9717 (ryzmae)
+    """
     def __init__(self, filename: str = "output.wav"):
         self.filname = filename
         self.recording = False
@@ -56,11 +61,26 @@ class AudStreamer:
             return SystemExit
         
         
-    def _record(self, channels: int, rate: int, record_time: int = None, start_time: int = 0):
+    def _record(
+        self,
+        channels: int,
+        rate: int,
+        record_time: int = None,
+        start_time: int = 0
+        ):
+        """
+        Adds the options to record your voice.
+        """
         audio = pyaudio.PyAudio()
-        stream = audio.open(format=pyaudio.paInt16, channels=channels, rate=rate, input=True, frames_per_buffer=1024)
+        stream = audio.open(
+            format=pyaudio.paInt16,
+            channels=channels,
+            rate=rate,
+            input=True,
+            frames_per_buffer=1024
+            )
         frames = []
-        print(Style.BRIGHT + Fore.GREEN + "[AUDSREAMER] Recording..." + Style.RESET_ALL + Fore.RESET)
+        print(with_date(f"{Style.BRIGHT} {Fore.GREEN}[AUDSREAMER] Recording... {Fore.RESET} {Style.RESET_ALL}"))
         
         if record_time is None:
             try:
@@ -92,33 +112,39 @@ class AudStreamer:
         sound.close()
         
         
-    def start_recording(self, channels: int, rate: int, record_time: int = None, start_time: int = 0):
+    def start_recording(
+        self, 
+        channels: int,
+        rate: int,
+        record_time: int = None,
+        start_time: int = 0
+        ):
         """
             Adds the options to start recording your voice.
             
-            Args:
+            Attributes:
                 channels (int): The amount of channels you want to record.
                 rate (int): The rate you want to record at.
                 record_time (int): The amount of time you want to record for.
                 start_time (int): The time you want to start recording at.
         """
         if channels > 2:
-            print(Style.BRIGHT + Fore.RED + "[WARNING] Channels must be 1 or 2!" + Style.RESET_ALL + Fore.RESET)
+            print(with_date(f"{Style.BRIGHT}{Fore.RED}[WARNING] Channels must be 1 or 2!{Fore.RESET}{Style.RESET_ALL}"))
             return
         
         elif rate > 38400:
             if platform == "win32":
-                print(Style.BRIGHT + Fore.RED + "[WARNING] Rate must be 38400!" + Style.RESET_ALL + Fore.RESET)
+                print(with_date(f"{Style.BRIGHT}{Fore.RED}[WARNING] Rate must be 38400!{Fore.RESET}{Style.RESET_ALL}"))
                 return
             
         elif rate > 44100:
             if platform == "linux" or platform == "linux2":
-                print(Style.BRIGHT + Fore.RED + "[WARNING] Rate must be 44100!" + Style.RESET_ALL + Fore.RESET)
+                print(with_date(f"{Style.BRIGHT}{Fore.RED}[WARNING] Rate must be 44100!{Fore.RESET}{Style.RESET_ALL}"))
                 return
             
         elif rate > 44100:
             if platform == "darwin":
-                print(Style.BRIGHT + Fore.RED + "[WARNING] Rate must be 44100!" + Style.RESET_ALL + Fore.RESET)
+                print(with_date(f"{Style.BRIGHT}{Fore.RED}[WARNING] Rate must be 44100!{Fore.RESET}{Style.RESET_ALL}"))
                 return
         
         self.recording = True
@@ -134,19 +160,19 @@ class AudStreamer:
         """
             Adds the options to stop recording your voice.
             
-            Args:
+            Atrributes:
                 None
         """
         self.recording = False
         self.thread.join()
-        print(Style.BRIGHT + Fore.GREEN + "[AUDSREAMER] Recording stopped!" + Style.RESET_ALL + Fore.RESET)
+        print(with_date(f"{Style.BRIGHT}{Fore.GREEN}[AUDSREAMER] Recording stopped!{Style.RESET_ALL}{Fore.RESET}"))
         
         if self.filname.endswith(tuple(self.audios)):
-            print(Style.BRIGHT + Fore.GREEN + f"[AUDSREAMER] File saved as {self.filname}" + Style.RESET_ALL + Fore.RESET)
+            print(with_date(f"{Style.BRIGHT}{Fore.GREEN}[AUDSREAMER] File saved as {self.filname}{Style.RESET_ALL}{Fore.RESET}"))
             return
         
         else:
-            print(Style.BRIGHT + Fore.RED + "[WARNING] Cannot save the audio File!" + Style.RESET_ALL + Fore.RESET)
+            print(with_date(f"{Style.BRIGHT}{Fore.RED}[WARNING] Cannot save the audio File!{Style.RESET_ALL}{Fore.RESET}"))
             
             
     def __del__(self):
