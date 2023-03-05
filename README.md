@@ -1,7 +1,9 @@
+# AudStream - 0.0.3
+
 [![Downloads](https://static.pepy.tech/badge/audstream)](https://pepy.tech/project/audstream)
 ![PyPI - License](https://img.shields.io/pypi/l/audstream)
 
-# What is AudStream?
+## What is AudStream?
 
 **AudStream is a simple audio streaming server written in Python.**
 
