@@ -51,3 +51,9 @@ from audstream import AudStreamer
 aud_streamer = AudStreamer(filename="xyz.mp3")
 aud_streamer.start_recording(1, 384000, 5)
 ```
+
+## Links
+
+* [Documentation](https://ceeq9717.github.io/audstream/)
+* [PyPI](https://pypi.org/project/audstream/)
+* [GitHub](https://github.com/ceeq9717/audstream)
