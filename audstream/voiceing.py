@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+# Modules
 import pyaudio
 import wave
 import time
@@ -27,7 +28,6 @@ import threading
 
 from colorama import Fore, Style
 from sys import platform
-
 class AudStreamer:
     def __init__(self, filename: str = "output.wav"):
         self.filname = filename
@@ -35,8 +35,21 @@ class AudStreamer:
         self.thread = None
         self.audios = [
             ".mp3",
-            ".wav"
+            ".wav",
+            ".aiff",
+            ".aif",
+            ".aifc",
+            ".flac",
+            ".ogg",
+            ".wma",
+            ".m4a",
+            ".mp4",
+            ".aac",
+            ".m4b",
+            ".m4p"
         ]
+        
+        
         
         if not self.filname.endswith(tuple(self.audios)):
             print(Style.BRIGHT + Fore.RED + "[WARNING] Invalid file type!" + Style.RESET_ALL + Fore.RESET)
@@ -80,7 +93,15 @@ class AudStreamer:
         
         
     def start_recording(self, channels: int, rate: int, record_time: int = None, start_time: int = 0):
-
+        """
+            Adds the options to start recording your voice.
+            
+            Args:
+                channels (int): The amount of channels you want to record.
+                rate (int): The rate you want to record at.
+                record_time (int): The amount of time you want to record for.
+                start_time (int): The time you want to start recording at.
+        """
         if channels > 2:
             print(Style.BRIGHT + Fore.RED + "[WARNING] Channels must be 1 or 2!" + Style.RESET_ALL + Fore.RESET)
             return
@@ -110,6 +131,12 @@ class AudStreamer:
         self.thread.start()
         
     def stop_recording(self):
+        """
+            Adds the options to stop recording your voice.
+            
+            Args:
+                None
+        """
         self.recording = False
         self.thread.join()
         print(Style.BRIGHT + Fore.GREEN + "[AUDSREAMER] Recording stopped!" + Style.RESET_ALL + Fore.RESET)
@@ -123,5 +150,8 @@ class AudStreamer:
             
             
     def __del__(self):
+        """
+        This is the destructor of the class.
+        """
         if self.recording:
             self.stop_recording()
