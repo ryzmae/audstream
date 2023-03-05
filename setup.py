@@ -7,8 +7,8 @@ here = os.path.abspath(os.path.dirname(__file__))
 with codecs.open(os.path.join(here, "README.md"), encoding="utf-8") as fh:
     long_description = "\n" + fh.read()
 
-VERSION = '0.0.3'
-DESCRIPTION = ''
+VERSION = '0.0.4'
+DESCRIPTION = 'A simple audio streamer for Python.'
 LONG_DESCRIPTION = ''
 
 # Setting up
