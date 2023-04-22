@@ -16,7 +16,7 @@ setup(
     name="audstream",
     version=VERSION,
     author="ryzmae (Ceeq9717)",
-    author_email="<juwennagpal6@gmail.com>",
+    author_email="<>",
     description=DESCRIPTION,
     long_description_content_type="text/markdown",
     long_description=long_description,
