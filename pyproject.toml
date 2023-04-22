@@ -2,7 +2,7 @@
 name = "audstream"
 version = "0.0.5"
 authors = [
-  { name="ryzmae", email="juwennagpal6@gmail.com" },
+  { name="ryzmae", email="" },
 ]
 description = "A simple audio streaming library for Python."
 readme = "README.md"
